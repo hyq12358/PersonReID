@@ -1,0 +1,13 @@
+IMG_HEIGHT = 128
+IMG_WIDTH = 64
+STEPS = 4800
+LEARNING_RATE = 0.001
+P = 32
+K = 8
+THETA_LABEL_SMOOTHING = 0.1 #for label smoothing
+CLS_LOSS_WEIGHT, TRI_LOSS_WEIGHT = (1, 5)
+DATA_DIR = '/students/julyedu_665963/market1501/bounding_box_train/'
+LOGDIR = 'logs/'
+CHECKPOINT_DIR = "checkpoints/"
+QUERY_DIR = "/students/julyedu_665963/market1501/query"
+GALLARY_DIR = "/students/julyedu_665963/market1501/gt_bbox"
