@@ -72,6 +72,7 @@ class CNNModel(nn.Module):
                     break
                 else:
                     features = module(features)
+            features = torch.squeeze(features)
         
         features = self.bn(features)
         preds = self.classifier(features)
