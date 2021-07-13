@@ -30,7 +30,7 @@ num_classes=market1501.num_classes
 """
 Create  model
 """
-model = CNNModel(num_classes=num_classes).to(device=device)
+model = CNNModel(backbone='resnet50', num_classes=num_classes).to(device=device)
 print(model)
 
 
