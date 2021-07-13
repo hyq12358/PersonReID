@@ -14,7 +14,7 @@ num_classes = 751
 ckt = "{}/person_reid.pth".format(config.CHECKPOINT_DIR)
 
 if __name__ == "__main__":
-    model = CNNModel(num_classes=num_classes)
+    model = CNNModel(backbone='resnet50', num_classes=num_classes)
 
     query_list, query_label = zip(*[(image_name, int(image_name[:4])) for image_name in os.listdir(config.QUERY_DIR) if image_name.endswith(".jpg")])
     gallary_list, gallary_label = zip(*[(image_name, int(image_name[:4])) for image_name in os.listdir(config.GALLARY_DIR) if image_name.endswith(".jpg") and image_name not in query_list])
