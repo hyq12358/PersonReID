@@ -62,19 +62,23 @@ class CNNModel(nn.Module):
         self.bn = nn.BatchNorm1d(in_features)
         
     def forward(self, x):
-        features = x
         if self.backbone_name == 'mobilenet_v2':
-            features = self.backbone.features(features)
+            features = self.backbone.features(x)
             features = features.mean(dim=(2,3))
         else:
-            for module in self.backbone:
-                if isinstance(module, nn.Linear):
-                    break
-                else:
-                    features = module(features)
+            features = self.backbone.conv1(x)
+            features = self.backbone.bn1(features)
+            features = self.backbone.relu(features)
+            features = self.backbone.maxpool(features)
+            features = self.backbone.layer1(features)
+            features = self.backbone.layer2(features)
+            features = self.backbone.layer3(features)
+            features = self.backbone.layer4(features)
+            features = self.backbone.avgpool(features)
             features = torch.squeeze(features)
-        
+
         features = self.bn(features)
         preds = self.classifier(features)
         features = F.normalize(features, p=2, dim=-1)
         return preds, features
+
